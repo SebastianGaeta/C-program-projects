@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <string.h>
+
+//Author: Sebastian G
+//Purpose: Create, write, and read .txt files.
+
+
+void ReadFromFiles(FILE *fp)
+{
+
+    int x;
+    int MAX_FILESIZE = 10000;
+    char filename[MAX_FILESIZE];       
+    char text[MAX_FILESIZE];
+
+    printf("Enter file name\n");
+        scanf("%s", &filename);
+        strcat(filename,".txt");
+            fp = fopen(filename, "r");
+        if (fp != NULL){
+            while(fgets(text, MAX_FILESIZE, fp)){
+            printf("\n%s", text);
+            }
+            fclose(fp);
+        } else {
+            printf("file does not exist.\n");
+        }
+};
+void AddTextToFile(FILE *fp)
+{
+    int x;
+    int MAX_FILESIZE = 10000;
+    char filename[MAX_FILESIZE];       
+    char text[MAX_FILESIZE];
+
+    printf("Enter file name\n");
+    scanf("%s", &filename); 
+    strcat(filename,".txt"); // combines "%s+.txt" to make file name *VERY USEFUL FOR USER*
+            fp = fopen(filename, "a");
+        if (fp != NULL) {
+            printf("\nEnter text to write and add.\n\n");
+            fgetc(stdin);
+            fgets(text, MAX_FILESIZE, stdin);
+            fprintf(fp, text);
+            printf("\nText added and saved.\n");
+            fclose(fp); 
+        } else {
+            printf("\nfile does not exist.\n");
+        }
+}
+void CreateFile_AddText(FILE *fp)
+{
+    int x;
+    int MAX_FILESIZE = 10000;
+    char filename[MAX_FILESIZE];       
+    char text[MAX_FILESIZE];    
+
+    printf("Create and enter a file name.\n");
+    scanf("%s", &filename);
+    strcat(filename,".txt"); // combines "%s+.txt" to make file name *VERY USEFUL FOR USER*
+        fp = fopen(filename,"w");
+    if (fp == NULL){
+        printf("\nfile unsuccesfully created.\n\n");
+    } else {
+        printf("\nfile succesfully created.\n\n");
+    }
+        printf("Enter 1 to write to file OR enter 0 to close file.\n");
+        scanf("%d", &x);
+            switch(x){
+            case 0:
+                printf("file closed.\n");
+                fclose(fp);
+            break;
+        
+            case 1:
+                printf("\nEnter text\n");
+                fgetc(stdin); // Allows for user input after scanf 
+                fgets(text, MAX_FILESIZE, stdin);
+                fprintf(fp, "%s", text);
+                printf("file saved and closed.\n");
+                fclose(fp);
+            break;
+        }
+}
+
+int main(){
+
+int x;
+
+do {
+
+printf("\nWelcome to my program. This code allows for the use of writing, reading, and creating text files. Enjoy!\n\n");
+printf("Enter 1 to create a file and write to a file\n");
+printf("Enter 2 to add text to an already existing file\n");
+printf("Enter 3 to read from a file\n");
+printf("Enter 0 to end program\n");
+scanf("%x", &x);
+
+switch(x){
+
+    case 1: // intitial file write and editor
+        CreateFile_AddText(0);
+    break;
+
+    case 2: // add text to a file
+        AddTextToFile(0);
+    break;
+
+    case 3: // reads from a file
+        ReadFromFiles(0);
+    break;
+
+    case 0:
+        printf("*Program end*, Have a nice day!");
+    break;
+}
+
+}
+
+while(x != 0);
+
+    return 0;
+
+}
