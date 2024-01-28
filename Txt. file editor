@@ -7,7 +7,6 @@
 
 void ReadFromFiles(FILE *fp)
 {
-
     int x;
     int MAX_FILESIZE = 10000;
     char filename[MAX_FILESIZE];       
@@ -60,9 +59,9 @@ void CreateFile_AddText(FILE *fp)
     strcat(filename,".txt"); // combines "%s+.txt" to make file name *VERY USEFUL FOR USER*
         fp = fopen(filename,"w");
     if (fp == NULL){
-        printf("\nfile unsuccesfully created.\n\n");
+        printf("\nfile unsuccessfully created.\n\n");
     } else {
-        printf("\nfile succesfully created.\n\n");
+        printf("\nfile susuccessfully created.\n\n");
     }
         printf("Enter 1 to write to file OR enter 0 to close file.\n");
         scanf("%d", &x);
